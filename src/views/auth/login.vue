@@ -70,11 +70,13 @@ export default {
               });
                 if(response.data){
                    localStorage.setItem('token',response.data.token);
-                    router.push({name:'admin.dashboard.planner'});
                     toast.success("Login Successfully", {
                         timeout: 2000
                     });
-                     reloadPage(); 
+                    router.push({name:'admin.dashboard.planner'});
+                      setTimeout(function() {
+                        window.location.reload();
+                    },500); 
                 }  
             }catch(error){
                 console.log(error)
@@ -83,12 +85,7 @@ export default {
               });
             }
         }
-        const reloadPage = ()=>{
-             setTimeout(function async() {
-             window.location.reload();
-             },500);
-        }
-        return {login ,reloadPage,form,token}
+        return {login,form,token}
     }
     
 }

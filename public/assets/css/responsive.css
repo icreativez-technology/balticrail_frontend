@@ -1154,11 +1154,41 @@
 }
 
 
+@media screen and (max-width: 1440px) {
+
+  table {
+    border-collapse:collapse;
+    width: 100%;
+  }  
+  .col-sm-2 {
+    flex: 62%;
+    max-width: 20%;
+  }
+  .col-sm-10 {
+    flex: 62%;
+    max-width: 78%;
+  }
+  .train-heading-SB{
+    font-size: 10px !important;
+  }
+  .train-heading-NB{
+    font-size: 10px !important;
+  }
+  .card-body {
+    padding: 0.5rem !important;
+}
+}
+
 @media screen and (max-width: 1024px) {
-  .col-9 {
+.col-sm-10 {
     flex: 62%;
     max-width: 62%;
     margin-top: 1%;
+}
+
+.col-sm-2 {
+  flex: 62%;
+  max-width: 30%;
 }
 .collapse.show {
   margin-left: 0% !important;
@@ -1192,12 +1222,12 @@ table {
   }
 }
 @media (min-width: 360px) and (max-width: 768px){
-.col-sm-3 {
+.col-sm-2 {
     flex: 100%;
     max-width: 100%;
     margin-top: 5%;
 }
-.col-9 {
+.col-sm-10 {
   flex: 0 0 75%;
   max-width: 100%;
   margin-top: 5%;
@@ -2256,7 +2286,9 @@ table {
     align-items: flex-start;
     flex-direction: column;
   }
-
+  .col-sm-2 {
+    margin-top: 5%;
+}
   /* .collapse.show {
     display: block;
     margin-left: 0% !important;
@@ -2274,7 +2306,7 @@ table {
   table {
     border-collapse: collapse !important; 
   }
-  .col-9 {
+  .col-10 {
     max-width: 100%;
     margin-top: 5%;
    }

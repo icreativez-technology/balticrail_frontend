@@ -6,11 +6,13 @@
     <div class="content-body">
       <!-- Basic form layout section start -->
       <section id="configuration">
-        <h1 class="ml-1 main-heading">Planner</h1>
-            <div class="row mb-2">
-              <div class="col-md-12 text-right order-log-btns">  
-
-            <div class="collapse" id="collapseExample">
+            <div class="row">
+               <div class="col-sm-6">
+                    <h1 class="ml-1 main-heading">Planner</h1>
+              </div>
+              <div class="col-sm-6">
+                <div class="col-md-12 text-right order-log-btns">  
+              <div class="collapse" id="collapseExample">
                     <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
                        <label for="weeks" class="planned-filter"><b><i class="fa fa-calendar" aria-hidden="true"></i> Weeks</b></label>
                        <li  v-for="(week,index) in planner.weeks_filter" :key="index">
@@ -43,10 +45,11 @@
                     <!-- <a href="javascript:void(0)"  data-toggle="modal" data-target="#addBooking"   class="general-btn d-inline-block">Booking <i class="fa fa-plus" aria-hidden="true"></i></a> -->
                      &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addTrain" class="general-btn d-inline-block">Train <i class="fa fa-plus" aria-hidden="true"></i></a>
                      &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addBookingToPlanner" class="general-btn d-inline-block">Booking To Planner <i class="fa fa-plus" aria-hidden="true"></i></a>
-                    </div>
-                </div>
+               </div>
+              </div>
+            </div>
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <div class="white-div border-20 px-lg-5 px-2">
                 <div class="form-group">
                 <label for="inputAddress">Select Filter</label>
@@ -88,10 +91,10 @@
                                                 <tr class="booking-items" v-for="(booking,index) in planner.bookings.data" :key="index">
                                                 <td :id="`booking-types-`+booking.booking_type"><input type="checkbox" class="train-select-booking"  v-model="bookingIds" @change="select" :value="booking.booking_display_id">
                                                 </td>
-                                                <td><span id="booking-ref">ID </span>{{booking.booking_display_id}} <br> {{booking.container_number}} <br> <span id="booking-ref">Booking Ref</span> <br> #{{booking.reference_number}} </td>
-                                                <td><span id="booking-ref">Client </span> <br>{{booking.user ? booking.user.name : 'N/A'}} <br><span id="booking-ref">Week</span> {{booking.week_number}}</td>
-                                                <td>{{booking.created_at}}<br> {{booking.goods ? booking.goods.size_type : 'N/A' }} <br> {{booking.goods ? booking.goods.container_net+' kg' : 'N/A' }}</td>
-                                              </tr>
+                                                <td>{{booking.container_number}}  {{booking.user ? booking.user.name : 'N/A'}} {{booking.reference_number}} </td>
+                                                <td>Wk {{booking.week_number}} {{booking.goods ? booking.goods.container_net+' kg' : 'N/A' }} </td>
+                                                <td>{{booking.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }} {{booking.booking_display_id}}</td>
+                                                </tr>
                                                 </table>
                                                 <Pagination :data="planner.bookings" align="right" :limit="-1" @pagination-change-page="getFilteredBooking" />
                                             </div>
@@ -104,11 +107,11 @@
               <div v-else class="mt-3 pb-2 text-center">No Record found</div>
             </div>
            </div>
-          <div class="col-9">
+          <div class="col-sm-10">
             <div class="white-div border-20 px-lg-5 px-2">
                <!-- <h2 class="sub-heading mt-2 ml-1">Weeks Planner</h2> -->
                 <div v-if="planner.weeks != ''">
-                   <carousel :items-to-show="3">
+                   <carousel :breakpoints="breakpoints">
                       <slide v-for="(week,wekIndex) in planner.weeks" :key="wekIndex">
                         <div class="col d-flex flex-column">
                           <div class="">
@@ -118,17 +121,16 @@
                             <p class="card-text heading"><strong>{{week.name}} - {{week.from_date}}</strong></p>
                             <hr/>
                                 <div class="trains" v-if="week.trains != null">
-                                  <div v-for="(train,trIndex) in week.trains" :key="trIndex">
+                                  <div v-for="(train,trIndex) in week.trains" :key="trIndex" class="trains-info" :id="`train-details-`+train.id">
                                    <a href="javascript:void(0)"><div :class="`train-meta-`+train.direction" data-toggle="collapse" :data-target="`#train-bookings`+train.id" aria-expanded="false" :aria-controls="`train-bookings`+train.id">
-                                       <h6 :class="`train-heading-`+train.direction"><i class="fa fa-subway" aria-hidden="true"></i> &nbsp;{{train.name}}</h6>
-                                         <div>
-                                            <p><span id="booking-ref">  Direction- </span><strong>{{train.direction}}</strong>&nbsp;&nbsp;
-                                              &nbsp;<span id="booking-ref"></span><strong>{{train.departure_date}}</strong></p>
-                                            </div>
-                                            <div>
-                                            <p><span id="booking-ref">  Cap-</span> <strong>{{getTrainCapcity(wekIndex,trIndex,train.id)}} kg</strong>&nbsp;&nbsp;
-                                              &nbsp;<span id="booking-ref">  TUE- </span> <strong>{{train.total_tue}}</strong></p>
-                                          </div>
+                                       <div :class="`train-heading-`+train.direction" @click="getTrianInfo(train.id,train.direction)">
+                                          <strong><i class="fa fa-subway" aria-hidden="true"></i> &nbsp;{{train.name}}</strong>&nbsp;&nbsp;
+                                          <strong>{{train.direction}}</strong>&nbsp;&nbsp;
+                                          &nbsp;<span id="booking-ref"></span><span>{{train.departure_date}}</span>
+                                          <br/>
+                                          <span>Cap- </span> <strong>{{getTrainCapcity(wekIndex,trIndex,train.id)}} kg</strong>&nbsp;&nbsp;
+                                          <span>TUE- </span><strong>{{train.total_tue}}</strong>
+                                       </div>
                                    </div></a>
                                     <br />
                                         <div v-if="train.train_booking.length > 0" class="booking-train collapse" :id="`train-bookings`+train.id">
@@ -151,19 +153,21 @@
                                             <tr class="booking-items" v-for="(booking,bokIndex) in train.train_booking" :key="bokIndex">
                                               <td :id="`booking-types-`+booking.bookings.booking_type"><input type="checkbox" class="train-select-booking"  v-model="booking.checked"  @change="selectTrainBooking(bokIndex,booking.checked,train.id,booking.bookings.booking_display_id)" :value="booking.bookings.id">
                                                <br>
+                                               <br>
                                                <i v-show="booking.is_copied" class="fa fa-clone" aria-hidden="true"></i>
                                                <br>
                                                <br>
                                                <i class="fa fa-trash" id="trash-icon" aria-hidden="true"  @click="removeBooking(booking.bookings.booking_display_id,booking.is_copied,train.id)"></i>
                                               </td>
-                                              <td colspan="2"><span id="booking-ref">ID </span>{{booking.bookings.booking_display_id}} <br> {{booking.bookings.container_number}} <br> <span id="booking-ref">Booking Ref</span> <br> #{{booking.bookings.reference_number}}</td>
-                                              <td><span id="booking-ref">Client </span> <br>{{booking.bookings.user ? booking.bookings.user.name : 'N/A'}}  <br><span id="booking-ref">Week  </span>{{booking.bookings.week_number}}</td>
-                                              <td>{{booking.bookings.created_at}} <br> {{booking.goods ? booking.goods.size_type : 'N/A' }} <br>{{booking.goods ? booking.goods.container_net+' kg' : 'N/A' }}</td>
+                                              <td>{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}} {{booking.bookings.reference_number}} </td>
+                                              <td>Wk {{booking.bookings.week_number}} {{booking.goods ? booking.goods.container_net+' kg' : 'N/A' }} </td>
+                                              <td>{{booking.bookings.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }} {{booking.bookings.booking_display_id}}</td>
                                             </tr>
                                           </table>
-                                            <br />
-                                        </div>
-                                    <br />
+                                        </div> 
+                                        <div v-else class="booking-train collapse" :id="`train-bookings`+train.id">
+                                        <p class="text-center">No Bookings Avaiable</p>  
+                                        </div>                                  
                                   </div>
                                 </div>
                             </div>
@@ -265,6 +269,7 @@ import CustomFunction from "./components/common/functions";
 import planner from "../store/state.js";
 import MainHeader from "../../core/header/index.vue";
 import Sidebar from "../../core/sidebar/index.vue";
+import $ from "jquery";
 export default {
     components: {
     Carousel,
@@ -296,9 +301,11 @@ export default {
         const search = ref('');
 
         onMounted(async () => {
-           await  CustomFunction.methods.getBookings();
-           await  CustomFunction.methods.vehicles();         
+         CustomFunction.methods.getBookings();
+         CustomFunction.methods.vehicles();         
+       
         })
+
 
         const addBookingToPlanner = async()=>{
             try{
@@ -344,7 +351,7 @@ export default {
                     timeout: 5000
                     });
                     $('#moveBooking').modal('hide');
-                    await CustomFunction.methods.vehicles();
+                    CustomFunction.methods.vehicles();
                 }  
             }catch(error){
                  errors.value = error.response.data.message
@@ -453,7 +460,6 @@ export default {
         }
 
          const selectTrainBooking = (bokIndex,value,trainId,bookingId) =>{
-          // console.log(bokIndex,'=======',value,'=======',bookingId);
            oldTrain.value = trainId;
               if(value){
                 trainBookingIds.value.push(bookingId); 
@@ -495,6 +501,10 @@ export default {
            status ? isMoved.value = status : isMoved.value = "";
         }
 
+        const getTrianInfo = (id,direction) =>{
+             (direction == 'NB') ?  $('#train-details-'+id).toggleClass("train-details-nb") : $('#train-details-'+id).toggleClass("train-details-sb")
+        }
+
         return{
           planner,
           errors,
@@ -520,7 +530,30 @@ export default {
           moveBookingToTrain,
           addMultipleBookingToPlanner,
           getTrainCapcity,
-          filterTrainBookings
+          filterTrainBookings,
+          getTrianInfo,
+             breakpoints: {
+              370: {
+                itemsToShow: 1,
+                snapAlign: "center"
+              },
+              700: {
+                itemsToShow: 2,
+                snapAlign: "center"
+              },
+              1024: {
+                itemsToShow: 5,
+                snapAlign: "center"
+              },
+              1440: {
+                itemsToShow: 3,
+                snapAlign: "center"
+              },
+              1600: {
+                itemsToShow: 5,
+                snapAlign: "center"
+              }
+            }
           }
     }
 }
