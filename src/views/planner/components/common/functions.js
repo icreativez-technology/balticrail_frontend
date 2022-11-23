@@ -25,7 +25,7 @@ export default{
       }catch(error){
           console.log(error)
       }
-  },
+    },
     async addBooking(){
       try{
       let response = await axios.post("user/bookings",{...planner.booking});

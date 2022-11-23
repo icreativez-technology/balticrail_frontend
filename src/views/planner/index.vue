@@ -265,7 +265,6 @@ import axios from "axios";
 import { useToast } from "vue-toastification";
 import CreateBooking from "./components/booking/create.vue";
 import CreateTrain from "./components/train/create.vue";
-import CustomFunction from "./components/common/functions";
 import planner from "../store/state.js";
 import MainHeader from "../../core/header/index.vue";
 import Sidebar from "../../core/sidebar/index.vue";
@@ -281,7 +280,6 @@ export default {
     MainHeader,
     Sidebar
     },
-    mixins:[CustomFunction],
     setup() {
         const toast = useToast();
         const errors   = ref();
@@ -301,12 +299,45 @@ export default {
         const search = ref('');
 
         onMounted(async () => {
-         CustomFunction.methods.getBookings();
-         CustomFunction.methods.vehicles();         
-       
+          getBookings();
+          vehicles();         
         })
 
+      const vehicles = async()=>{
+        try{
+          let response = await axios.get("front/vehicles");
+            if(response.data){
+              planner.weeks       = response.data.weeks
+              planner.weeks_filter= response.data.weeks_filter
+              planner.trains      = response.data.trains
+              planner.clients     = response.data.clients
+            } 
+            
+        }catch(error){
+            console.log(error)
+        }
+      }
+        const getBookings = async(page = 1)=>{
+          try{
+            let response = await axios.get("user/bookings?page="+page);
+              if(response.data){
+                planner.bookings = response.data;
+              }  
+          }catch(error){
+              console.log(error)
+          }
+        }
 
+       const getBookingData = async()=>{
+          try{
+          let response = await axios.get("front/get_booking_data");
+          if(response){
+              return response;
+          }  
+          }catch(error){
+              console.log(error)
+          }
+      }
         const addBookingToPlanner = async()=>{
             try{
               let response = await axios.post("user/bookings/planners/add_booking_to_train",{
@@ -318,8 +349,8 @@ export default {
                     timeout: 5000
                     });
                     $('#addBookingToPlanner').modal('hide');
-                    CustomFunction.methods.vehicles();
-                    CustomFunction.methods.getBookings();
+                     vehicles();
+                     getBookings();
                     train.train_id   = " ";
                     train.booking_id = " ";
                 }  
@@ -351,7 +382,7 @@ export default {
                     timeout: 5000
                     });
                     $('#moveBooking').modal('hide');
-                    CustomFunction.methods.vehicles();
+                    vehicles();
                 }  
             }catch(error){
                  errors.value = error.response.data.message
@@ -382,7 +413,7 @@ export default {
               train_id:train_id
             });
             if(response.data){
-                CustomFunction.methods.vehicles();
+                vehicles();
                 toast.success(response.data.message, {
                     timeout: 5000
                 });

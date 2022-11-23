@@ -73,10 +73,13 @@ export default {
                     toast.success("Login Successfully", {
                         timeout: 2000
                     });
-                    router.push({name:'admin.dashboard.planner'});
-                      setTimeout(function() {
+
+                    setTimeout(function() {
                         window.location.reload();
-                    },500); 
+                    },500);
+
+                    router.push({name:'admin.dashboard.planner'});
+                     
                 }  
             }catch(error){
                 console.log(error)
