@@ -91,9 +91,9 @@
                                                 <tr class="booking-items" v-for="(booking,index) in planner.bookings.data" :key="index">
                                                 <td :id="`booking-types-`+booking.booking_type"><input type="checkbox" class="train-select-booking"  v-model="bookingIds" @change="select" :value="booking.booking_display_id">
                                                 </td>
-                                                <td>{{booking.container_number}}  {{booking.user ? booking.user.name : 'N/A'}} {{booking.reference_number}} </td>
-                                                <td>Wk {{booking.week_number}} {{booking.goods ? booking.goods.container_net+' kg' : 'N/A' }} </td>
-                                                <td>{{booking.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }} {{booking.booking_display_id}}</td>
+                                                <td>{{booking.container_number}}  {{booking.user ? booking.user.name : 'N/A'}}<br><small>Ref</small> {{booking.reference_number}}</td>
+                                                <td>Wk {{booking.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small></td>
+                                                <td>{{booking.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }} <br><small>ID</small> {{booking.booking_display_id}}</td>
                                                 </tr>
                                                 </table>
                                                 <Pagination :data="planner.bookings" align="right" :limit="-1" @pagination-change-page="getFilteredBooking" />
@@ -159,9 +159,9 @@
                                                <br>
                                                <i class="fa fa-trash" id="trash-icon" aria-hidden="true"  @click="removeBooking(booking.bookings.booking_display_id,booking.is_copied,train.id)"></i>
                                               </td>
-                                              <td>{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}} {{booking.bookings.reference_number}} </td>
-                                              <td>Wk {{booking.bookings.week_number}} {{booking.goods ? booking.goods.container_net+' kg' : 'N/A' }} </td>
-                                              <td>{{booking.bookings.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }} {{booking.bookings.booking_display_id}}</td>
+                                              <td>{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}}<br><small>Ref</small> {{booking.bookings.reference_number}}</td>
+                                              <td>Wk {{booking.bookings.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small></td>
+                                              <td>{{booking.bookings.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }}<br><small>ID</small> {{booking.bookings.booking_display_id}}</td>
                                             </tr>
                                           </table>
                                         </div> 

@@ -7153,7 +7153,7 @@ table.dataTable .dropdown-menu a.dropdown-item:hover i {
 .white-div {
     background-color: white;
     border-radius: 5px;
-    padding: 5px !important;
+    padding: 10px !important;
 }
 
 .subscription-package {
@@ -8553,7 +8553,7 @@ input[type="search"] {
 }
 
 table {
-    border-collapse: collapse;
+    border-collapse:inherit !important;
     width: 100%;
 }
 .carousel__next {
@@ -8644,10 +8644,10 @@ i.fa.fa-clone {
 }
 
 td {
-    font-size: 13px;
-    font-weight: 350;
+    font-size: 12px;
+    font-weight: 400;
     color: black;
-    padding: 5px;
+    padding: 2px;
 }
 
 p {
@@ -8689,6 +8689,11 @@ td#booking-types-outbound {
 }
 .card-body {
     padding: 0.5rem;
+}
+
+small, .small {
+    font-size: 80%;
+    font-weight: 500;
 }
 /* .carousel__track{
     transform: translateX(2.105px) !important;
