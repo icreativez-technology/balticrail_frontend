@@ -44,7 +44,7 @@
                     <a href="javascript:void(0)" class="general-btn d-inline-block"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filters <i class="fa fa-filter" aria-hidden="true"></i></a>&nbsp;
                     <!-- <a href="javascript:void(0)"  data-toggle="modal" data-target="#addBooking"   class="general-btn d-inline-block">Booking <i class="fa fa-plus" aria-hidden="true"></i></a> -->
                      &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addTrain" class="general-btn d-inline-block">Train <i class="fa fa-plus" aria-hidden="true"></i></a>
-                     &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addBookingToPlanner" class="general-btn d-inline-block">Booking To Planner <i class="fa fa-plus" aria-hidden="true"></i></a>
+                     &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addBookingToPlanner" class="general-btn d-inline-block">B To P <i class="fa fa-plus" aria-hidden="true"></i></a>
                </div>
               </div>
             </div>
@@ -93,8 +93,8 @@
                                                 </td>
                                                 <td>{{booking.container_number}}  {{booking.user ? booking.user.name : 'N/A'}}<br><small>Ref</small> {{booking.reference_number}}</td>
                                                 <td>Wk {{booking.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small></td>
-                                                <td>{{booking.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }} <br><small>ID</small> {{booking.booking_display_id}}</td>
-                                                </tr>
+                                                <td>{{booking.created_at}}<br>  {{booking.goods ? booking.goods.size_type : 'N/A' }} <br><small>ID</small> {{booking.booking_display_id}}</td>
+                                                </tr>            
                                                 </table>
                                                 <Pagination :data="planner.bookings" align="right" :limit="-1" @pagination-change-page="getFilteredBooking" />
                                             </div>
@@ -159,7 +159,7 @@
                                                <br>
                                                <i class="fa fa-trash" id="trash-icon" aria-hidden="true"  @click="removeBooking(booking.bookings.booking_display_id,booking.is_copied,train.id)"></i>
                                               </td>
-                                              <td>{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}}<br><small>Ref</small> {{booking.bookings.reference_number}}</td>
+                                              <td>{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}}<br><small>Ref</small> <span id="bok-ref">{{booking.bookings.reference_number}}</span></td>
                                               <td>Wk {{booking.bookings.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small></td>
                                               <td>{{booking.bookings.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }}<br><small>ID</small> {{booking.bookings.booking_display_id}}</td>
                                             </tr>
@@ -297,14 +297,18 @@ export default {
         const directionFilter    = ref([]);
         const filter = ref('unplanned');
         const search = ref('');
+        const token  = ref();
 
         onMounted(async () => {
+          token.value = localStorage.getItem("token");
+          axios.defaults.headers.common = {'Authorization': `Bearer ${token.value}`} 
           getBookings();
           vehicles();         
         })
 
       const vehicles = async()=>{
         try{
+          
           let response = await axios.get("front/vehicles");
             if(response.data){
               planner.weeks       = response.data.weeks
@@ -568,12 +572,12 @@ export default {
                 itemsToShow: 1,
                 snapAlign: "center"
               },
-              700: {
-                itemsToShow: 2,
+              768: {
+                itemsToShow: 1,
                 snapAlign: "center"
               },
               1024: {
-                itemsToShow: 5,
+                itemsToShow: 3,
                 snapAlign: "center"
               },
               1440: {

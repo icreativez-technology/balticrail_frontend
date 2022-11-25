@@ -7153,7 +7153,7 @@ table.dataTable .dropdown-menu a.dropdown-item:hover i {
 .white-div {
     background-color: white;
     border-radius: 5px;
-    padding: 10px !important;
+    padding: 8px !important;
 }
 
 .subscription-package {
@@ -8644,7 +8644,7 @@ i.fa.fa-clone {
 }
 
 td {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
     color: black;
     padding: 2px;
@@ -8692,9 +8692,11 @@ td#booking-types-outbound {
 }
 
 small, .small {
-    font-size: 80%;
+    font-size: 90%;
     font-weight: 500;
+    color: gray !important;
 }
+
 /* .carousel__track{
     transform: translateX(2.105px) !important;
 } */

@@ -70,19 +70,12 @@ export default {
               });
                 if(response.data){
                    localStorage.setItem('token',response.data.token);
-                    toast.success("Login Successfully", {
+                    toast.success("Login Successfully",{
                         timeout: 2000
                     });
-
-                    setTimeout(function() {
-                        window.location.reload();
-                    },500);
-
                     router.push({name:'admin.dashboard.planner'});
-                     
                 }  
             }catch(error){
-                console.log(error)
                 toast.error(error.response.data.message.username[0], {
                     timeout: 2000
               });

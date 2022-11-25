@@ -14,17 +14,17 @@
                 <ul class="nav navbar-nav mr-auto float-left">
                 </ul>
                 <ul class="nav navbar-nav float-right">
-                    <li class="dropdown dropdown-notification nav-item two-bell-icons">
+                    <!-- <li class="dropdown dropdown-notification nav-item two-bell-icons">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
                             <i class="far fa-bell color-purple-i"></i>
-                            <!-- <img src="images/bell-icon.png" alt="" class="img-fluid"> -->
-                            <!-- <span class="badge badge-pill badge-default badge-danger badge-default badge-up">5</span> -->
+                            <img src="images/bell-icon.png" alt="" class="img-fluid">
+                            <span class="badge badge-pill badge-default badge-danger badge-default badge-up">5</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
                                 <h6 class="dropdown-header m-0">
                                     <span class="grey darken-2">Notifications</span>
-                                    <!-- <span class="notification-tag badge badge-default badge-danger float-right m-0">5 New</span>  -->
+                                    <span class="notification-tag badge badge-default badge-danger float-right m-0">5 New</span> 
                                 </h6>
                             </li>
                             <li class="scrollable-container media-list ps-container ps-theme-dark ps-active-y" data-ps-id="75e644f2-605d-3ecc-f100-72d86e4a64d8">
@@ -34,7 +34,7 @@
                                             <i class="fas fa-bell notifications-bell"></i>
                                         </div>
                                         <div class="media-body">
-                                            <!-- <h6 class="media-heading">You have new notification!</h6> -->
+                                            <h6 class="media-heading">You have new notification!</h6>
                                             <p class="font-small-3 l-grey-text font-weight-light">Lorem ipsum
                                                 dolor sit
                                                 amet, consectetuer elit.</p>
@@ -55,7 +55,7 @@
                                             <i class="fas fa-bell notifications-bell"></i>
                                         </div>
                                         <div class="media-body">
-                                            <!-- <h6 class="media-heading">You have new notification!</h6> -->
+                                            <h6 class="media-heading">You have new notification!</h6>
                                             <p class="font-small-3 l-grey-text font-weight-light">Lorem ipsum
                                                 dolor sit amet, consete tur sadipscing elitr, sed diam nonumy eirmod
                                                 tempor invidunt.</p>
@@ -77,7 +77,7 @@
                                             <i class="fas fa-bell notifications-bell"></i>
                                         </div>
                                         <div class="media-body">
-                                            <!-- <h6 class="media-heading">You have new notification!</h6> -->
+                                            <h6 class="media-heading">You have new notification!</h6>
                                             <p class="font-small-3 l-grey-text font-weight-light">Lorem ipsum
                                                 dolor sit
                                                 amet, consectetuer elit.</p>
@@ -99,7 +99,7 @@
                                             <i class="fas fa-bell notifications-bell"></i>
                                         </div>
                                         <div class="media-body">
-                                            <!-- <h6 class="media-heading">You have new notification!</h6> -->
+                                            <h6 class="media-heading">You have new notification!</h6>
                                             <p class="font-small-3 l-grey-text font-weight-light">Lorem ipsum
                                                 dolor sit
                                                 amet, consectetuer elit.</p>
@@ -120,13 +120,15 @@
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item notification text-muted text-center underline" href="notifications.php">View All Notifications</a></li>
                         </ul>
-                    </li>
+                    </li> -->
+
+
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="avatar avatar-online">
                                 <img src="@/assets/images/admin-profile-img.png" alt="avatar">
                             </span>
-                            <span class="user-name">Sammy Aiden<br><span class="user-title">Admin</span></span>
+                            <span class="user-name"><span class="user-title">Admin</span></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <!-- <a class="dropdown-item" href="javascript"><i class="fas fa-user-circle"></i>Profile</a> -->
@@ -159,10 +161,6 @@ export default {
                 if(response){
                     localStorage.removeItem("token");
                     router.push({name:'admin.auth.login'});
-                    setTimeout(function () {
-                       window.location.href = window.location.href;
-                        location.reload(true);
-                    }, 500);
                     toast.success("Successfully logged out", {
                     timeout: 2000
                     });

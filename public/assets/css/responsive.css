@@ -1162,11 +1162,17 @@
   }  
   .col-sm-2 {
     flex: 62%;
-    max-width: 20%;
+    max-width: 22%;
   }
   .col-sm-10 {
     flex: 62%;
     max-width: 78%;
+  }
+  td {
+    font-size: 11px;
+    font-weight: 400;
+    color: black;
+    padding: 3px;
   }
   .train-heading-SB{
     font-size: 10px !important;
@@ -1180,18 +1186,30 @@
 }
 
 @media screen and (max-width: 1024px) {
-.col-sm-10 {
-    flex: 62%;
-    max-width: 62%;
-    margin-top: 1%;
+  .col-sm-2 {
+    max-width: 40%;
+    margin-top: 5%;
 }
-
-.col-sm-2 {
-  flex: 62%;
-  max-width: 30%;
+.col-sm-10 {
+  max-width: 60%;
+  margin-top: 5%;
 }
 .collapse.show {
   margin-left: 0% !important;
+}
+
+.order-log-btns .general-btn {
+  display: block !important;
+}
+/* div#collapseExample {
+  display: flex !important;
+} */
+ul.d-inline-block.table-entry.white-div.border-20.px-lg-5.px-2{
+  width: 100%;
+}
+.col-sm-6 {
+  flex: 0 0 50%;
+  max-width: 100%;
 }
 
 table {
@@ -1210,6 +1228,27 @@ table {
   .content-wrapper::after {
     display: none;
   }
+.col-sm-2 {
+    max-width: 45%;
+    margin-top: 5%;
+}
+.col-sm-10 {
+  max-width: 55%;
+  margin-top: 5%;
+}
+.order-log-btns .general-btn {
+  display: block !important;
+}
+/* div#collapseExample {
+  display: flex !important;
+} */
+ul.d-inline-block.table-entry.white-div.border-20.px-lg-5.px-2{
+  width: 100%;
+}
+.col-sm-6 {
+  flex: 0 0 50%;
+  max-width: 100%;
+}
   .collapse.show {
     margin-left: 0% !important;
   }
@@ -1221,7 +1260,7 @@ table {
     text-align: left;
   }
 }
-@media (min-width: 360px) and (max-width: 768px){
+@media (min-width: 320px) and (max-width: 425px){
 .col-sm-2 {
     flex: 100%;
     max-width: 100%;
@@ -1238,7 +1277,13 @@ table {
  li.carousel__slide.carousel__slide--visible {
   width: 100% !important;
 }
-
+.white-div {
+  padding: 13px !important;
+}
+.carousel__prev, .carousel__next{
+  width: 20px !important;
+  height: 20px !important;
+}
 }
 @media screen and (max-width: 767px) {
   .main-heading {
@@ -2293,6 +2338,11 @@ table {
     display: block;
     margin-left: 0% !important;
   } */
+
+  .carousel__prev, .carousel__next{
+    width: 10px !important;
+    height: 10px !important;
+  }
   .table-entry {
     width: 100% !important;
   }
