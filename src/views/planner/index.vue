@@ -122,7 +122,7 @@
                             <hr/>
                                 <div class="trains" v-if="week.trains != null">
                                   <div v-for="(train,trIndex) in week.trains" :key="trIndex" class="trains-info" :id="`train-details-`+train.id">
-                                   <a href="javascript:void(0)"><div :class="`train-meta-`+train.direction" data-toggle="collapse" :data-target="`#train-bookings`+train.id" aria-expanded="false" :aria-controls="`train-bookings`+train.id">
+                                   <a href="javascript:void(0)"><div :class="`train-meta-`+train.direction" data-toggle="collapse" :data-target="`#train-bookings-`+train.id" aria-expanded="false" :aria-controls="`train-bookings-`+train.id">
                                        <div :class="`train-heading-`+train.direction" @click="getTrianInfo(train.id,train.direction)">
                                           <strong><i class="fa fa-subway" aria-hidden="true"></i> &nbsp;{{train.name}}</strong>&nbsp;&nbsp;
                                           <strong>{{train.direction}}</strong>&nbsp;&nbsp;
@@ -133,7 +133,7 @@
                                        </div>
                                    </div></a>
                                     <br />
-                                        <div v-if="train.train_booking.length > 0" class="booking-train collapse" :id="`train-bookings`+train.id">
+                                        <div v-if="train.train_booking.length > 0" class="booking-train collapse" :id="`train-bookings-`+train.id">
                                           <span id="all-bookings"><input type="checkbox" class="train-select-booking"  v-model="trainBookingSelected[train.id]" @click="selectAllTrainBooking(wekIndex,trIndex,bokIndex,train.id)"></span>
                                           <span id="train-booking-actions">
                                           <div class="btn-group ml-1">
@@ -165,8 +165,8 @@
                                             </tr>
                                           </table>
                                         </div> 
-                                        <div v-else class="booking-train collapse" :id="`train-bookings`+train.id">
-                                        <p class="text-center">No Bookings Avaiable</p>  
+                                        <div v-else class="booking-train collapse" :id="`train-bookings-`+train.id">
+                                        <p class="text-center">No Bookings available</p>  
                                         </div>                                  
                                   </div>
                                 </div>
@@ -289,6 +289,7 @@ export default {
         const trainBookingIds  = ref([]);
         const isCopied    = ref(false);
         const isMoved     = ref();
+        const trainId     = ref();
         const isCopiedValue  = ref();
         const oldTrain     = ref();
         const clientsFilter  = ref([]);
@@ -302,8 +303,8 @@ export default {
         onMounted(async () => {
           token.value = localStorage.getItem("token");
           axios.defaults.headers.common = {'Authorization': `Bearer ${token.value}`} 
-          getBookings();
-          vehicles();         
+          await getBookings();
+          await vehicles();         
         })
 
       const vehicles = async()=>{
@@ -332,16 +333,16 @@ export default {
           }
         }
 
-       const getBookingData = async()=>{
-          try{
-          let response = await axios.get("front/get_booking_data");
-          if(response){
-              return response;
-          }  
-          }catch(error){
-              console.log(error)
-          }
-      }
+      //  const getBookingData = async()=>{
+      //     try{
+      //     let response = await axios.get("front/get_booking_data");
+      //     if(response){
+      //         return response;
+      //     }  
+      //     }catch(error){
+      //         console.log(error)
+      //     }
+      // }
         const addBookingToPlanner = async()=>{
             try{
               let response = await axios.post("user/bookings/planners/add_booking_to_train",{
@@ -353,8 +354,8 @@ export default {
                     timeout: 5000
                     });
                     $('#addBookingToPlanner').modal('hide');
-                     vehicles();
-                     getBookings();
+                    await vehicles();
+                    await getBookings();
                     train.train_id   = " ";
                     train.booking_id = " ";
                 }  
@@ -377,16 +378,24 @@ export default {
                 status:isMoved.value
               });
                 if(response.data){
-                   trainBookingIds.value = "";
-                   bookingIds.value = "";
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 100);
-                   toast.success(response.data.message, {
-                    timeout: 5000
-                    });
-                    $('#moveBooking').modal('hide');
-                    vehicles();
+                  toast.success(response.data.message, {
+                      timeout: 5000
+                  });  
+                await vehicles();
+                await getBookings();
+                for(var i=0; i<planner.trains.length; i++){
+                    if(planner.trains[i].id == planner.train.train_id){
+                      var  trainDirection = planner.trains[i].direction;
+                    } 
+                }
+                $('#moveBooking').css("display","none");
+                $("body").removeClass("modal-open");
+                $('.modal-backdrop').remove();
+                $('#train-bookings-'+planner.train.train_id).addClass("show");
+                $('#train-details-'+planner.train.train_id).addClass("train-details-"+trainDirection);
+                $('#train-details-'+planner.train.train_id).addClass("trains-info");
+                $('#train-details-'+planner.train.train_id).addClass("trains-opened");
+        
                 }  
             }catch(error){
                  errors.value = error.response.data.message
@@ -417,13 +426,14 @@ export default {
               train_id:train_id
             });
             if(response.data){
-                vehicles();
+               await vehicles();
+               await getBookings();
                 toast.success(response.data.message, {
                     timeout: 5000
                 });
             }  
             }catch(error){
-                 toast.error(error, {
+                 toast.error(error.response.data.message, {
                     timeout: 5000
                   });
             }
@@ -537,7 +547,9 @@ export default {
         }
 
         const getTrianInfo = (id,direction) =>{
-             (direction == 'NB') ?  $('#train-details-'+id).toggleClass("train-details-nb") : $('#train-details-'+id).toggleClass("train-details-sb")
+             (direction == 'NB') ?  $('#train-details-'+id).toggleClass("train-details-NB") : $('#train-details-'+id).toggleClass("train-details-SB")
+             $('#train-details-'+id).toggleClass("trains-info");
+             $('#train-details-'+id).toggleClass("trains-opened");
         }
 
         return{

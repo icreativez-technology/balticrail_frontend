@@ -1312,6 +1312,7 @@ ul.nav.navbar-nav.flex-row {
 
 ul.nav.navbar-nav.float-right {
     margin: 25px 0 0 0;
+    margin-top: 0px !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -1373,13 +1374,13 @@ body.vertical-layout.vertical-menu .navbar .navbar-brand {
 
 .main-menu.menu-fixed {
     position: fixed;
-    top: 119px;
+    top: 55px;
     height: calc(100% - 4rem);
 }
 
 html body .content .content-wrapper,
 html body .content-custom .content-wrapper {
-    padding: 8rem 1rem;
+    padding: 5rem 1rem;
     background-color: #fff !important;
 }
 
@@ -6379,8 +6380,8 @@ video[poster] {
 }
 
 .header-navbar .navbar-header .navbar-brand .brand-logo {
-    margin-top: -5px;
-    height: 82px;
+    margin-top: -20px;
+    height: 60px;
 }
 
 ::placeholder {
@@ -7417,6 +7418,7 @@ table.dataTable .dropdown-menu a.dropdown-item:hover i {
 .header-navbar .navbar-wrapper {
     border-bottom: 5px solid #ffc107;
     border-radius: 25px;
+    max-height: 55px !important;
 }
 
 .content-wrapper {
@@ -7428,7 +7430,7 @@ table.dataTable .dropdown-menu a.dropdown-item:hover i {
     top: 0;
     right: 0;
     content: "";
-    background-image: url(../../images/content-top.png);
+    /* background-image: url(../../images/content-top.png); */
     background-position: left bottom;
     width: 90px;
     height: 130px;
@@ -8593,32 +8595,36 @@ span#train-booking-actions {
 .train-meta-NB {
     /* border: 2px dashed orange; */
     border-radius: 12px;
-    font-size: 13px;
+    font-size: 14px;
 }
 .train-meta-SB {
     /* border: 2px dashed #0fbb3d; */
     border-radius: 12px;
-    font-size: 13px;
+    font-size: 14px;
 }
 .booking-train {
     line-height: 13px !important;
     text-align: left;
 }
 
-.train-details-nb {
+.train-details-NB {
     border: 3px solid orange;
     border-radius: 14px;
     padding: 5px;
 }
 
-.train-details-sb {
+.train-details-SB {
     border: 3px solid #0fbb3d;
     border-radius: 14px;
     padding: 5px;
 }
 
 .trains-info {
-    margin-bottom: 10px;
+    margin-bottom: -5% !important
+}
+
+.trains-opened {
+    margin-bottom: 10px !important
 }
 
 table tr.booking-items {
@@ -8697,6 +8703,6 @@ small, .small {
     color: gray !important;
 }
 
-/* .carousel__track{
-    transform: translateX(2.105px) !important;
-} */
+nav.header-navbar.navbar-expand-md.navbar.navbar-with-menu.fixed-top.navbar-light.navbar-border {
+    max-height: 5% !important;
+}

@@ -1175,10 +1175,10 @@
     padding: 3px;
   }
   .train-heading-SB{
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
   .train-heading-NB{
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
   .card-body {
     padding: 0.5rem !important;
@@ -1283,6 +1283,13 @@ table {
 .carousel__prev, .carousel__next{
   width: 20px !important;
   height: 20px !important;
+}
+
+nav.header-navbar.navbar-expand-md.navbar.navbar-with-menu.fixed-top.navbar-light.navbar-border {
+  max-height: 30% !important;
+}
+.header-navbar .navbar-wrapper{
+  max-height: 100px !important;
 }
 }
 @media screen and (max-width: 767px) {
