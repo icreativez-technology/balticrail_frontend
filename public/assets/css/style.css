@@ -8620,7 +8620,7 @@ span#train-booking-actions {
 }
 
 .trains-info {
-    margin-bottom: -5% !important
+    margin-bottom: -10% !important
 }
 
 .trains-opened {
@@ -8664,9 +8664,8 @@ p {
 ul.d-inline-block.table-entry.white-div.border-20.px-lg-5.px-2 {
     text-align: left;
     list-style: none;
-    border: 2px dashed #0fbb3d;
     display: inline-block;
-    border-radius:0px !important;
+    border-radius:10px !important;
 }
 label.planned-filter {
     width: 100%;
@@ -8705,4 +8704,17 @@ small, .small {
 
 nav.header-navbar.navbar-expand-md.navbar.navbar-with-menu.fixed-top.navbar-light.navbar-border {
     max-height: 5% !important;
+}
+div#collapseExample {
+    margin-top: 0px;
+}
+mark, .mark {
+    background-color: yellow !important;
+}
+#booking-status-Pre{
+    color: gray;
+    font-weight: bolder;
+}
+#booking-status-B{
+    font-weight: bolder;
 }

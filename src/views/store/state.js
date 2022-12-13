@@ -9,6 +9,7 @@ const planner = reactive({
     train: [],
     trains:{},
     weeks_filter:{},
+    terminals:{},
     weeks:{},
     clients:{}
 })

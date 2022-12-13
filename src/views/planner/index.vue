@@ -7,41 +7,58 @@
       <!-- Basic form layout section start -->
       <section id="configuration">
             <div class="row">
-               <div class="col-sm-6">
+               <!-- <div class="col-sm-6">
                     <h1 class="ml-1 main-heading">Planner</h1>
-              </div>
-              <div class="col-sm-6">
-                <div class="col-md-12 text-right order-log-btns">  
-              <div class="collapse" id="collapseExample">
-                    <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
-                       <label for="weeks" class="planned-filter"><b><i class="fa fa-calendar" aria-hidden="true"></i> Weeks</b></label>
-                       <li  v-for="(week,index) in planner.weeks_filter" :key="index">
-                       <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="weeksFilter" :value="week.name"> {{week.name}}
-                      </li>
-                     </ul>&nbsp;&nbsp;
-                    <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
-                       <label for="trains" class="planned-filter"><b><i class="fa fa-subway" aria-hidden="true"></i> Trains</b></label>
-                      <li  v-for="(train,index) in planner.trains" :key="index">
-                        <input type="checkbox" class="train-select-booking" @change="filterTrainBookings"  v-model="trainsFilter" :value="train.name"> {{train.name}}
-                      </li>
-                    </ul>&nbsp;&nbsp;
+              </div> -->
+              <div class="col-sm-12">
+                    <div class="collapse" id="collapseExample">
                       <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
-                      <label for="clints" class="planned-filter"><b><i class="fa fa-users" aria-hidden="true"></i> Clients</b></label>
-                      <li  v-for="(client,index) in planner.clients" :key="index">
-                       <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="clientsFilter" :value="client.id"> {{client.name}}
-                      </li>
-                     </ul>&nbsp;&nbsp;
-                     <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
-                      <label for="clints" class="planned-filter"><b><i class="fa fa-rocket" aria-hidden="true"></i> Directions</b></label>
-                      <li>
-                       <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="directionFilter" value="sb"> South Bound
-                      </li>
-                      <li>
-                       <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="directionFilter" value="nb"> North Bound
-                      </li>
-                     </ul>
-                </div>                 
-                    <a href="javascript:void(0)" class="general-btn d-inline-block"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filters <i class="fa fa-filter" aria-hidden="true"></i></a>&nbsp;
+                        <label for="weeks" class="planned-filter"><b><i class="fa fa-calendar" aria-hidden="true"></i> Weeks</b></label>
+                        <li  v-for="(week,index) in planner.weeks_filter" :key="index">
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="weeksFilter" :value="week.id"> {{week.name}}
+                        </li>
+                      </ul>&nbsp;&nbsp;
+                      <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
+                        <label for="trains" class="planned-filter"><b><i class="fa fa-subway" aria-hidden="true"></i> Trains</b></label>
+                        <li  v-for="(train,index) in planner.trains" :key="index">
+                          <input type="checkbox" class="train-select-booking" @change="filterTrainBookings"  v-model="trainsFilter" :value="train.name"> {{train.name}}
+                        </li>
+                      </ul>&nbsp;&nbsp;
+                        <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
+                        <label for="clints" class="planned-filter"><b><i class="fa fa-users" aria-hidden="true"></i> Clients</b></label>
+                        <li  v-for="(client,index) in planner.clients" :key="index">
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="clientsFilter" :value="client.id"> {{client.name}}
+                        </li>
+                      </ul>&nbsp;&nbsp;
+                      <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
+                        <label for="clints" class="planned-filter"><b><i class="fa fa-rocket" aria-hidden="true"></i> Directions</b></label>
+                        <li>
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="directionFilter" value="sb"> South Bound
+                        </li>
+                        <li>
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="directionFilter" value="nb"> North Bound
+                        </li>
+                      </ul>
+                      &nbsp;&nbsp;
+                        <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
+                        <label for="clints" class="planned-filter"><b><i class="fa fa-terminal" aria-hidden="true"></i>Terminal</b></label>
+                        <li  v-for="(terminal,index) in planner.terminals" :key="index">
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="terminalFilter" :value="terminal.id"> {{terminal.name}}
+                        </li>
+                      </ul>&nbsp;&nbsp;
+                      &nbsp;&nbsp;
+                        <ul class="d-inline-block table-entry white-div border-20 px-lg-5 px-2">
+                        <label for="clints" class="planned-filter"><b><i class="fa fa-product-hunt" aria-hidden="true"></i> Booking Type</b></label>
+                        <li>
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="bookingTypeFilter" value="pre-booking"> Pre Booking
+                        </li>
+                        <li>
+                        <input type="checkbox" class="train-select-booking"  @change="filterTrainBookings"  v-model="bookingTypeFilter" value="booking"> Booking
+                        </li>
+                      </ul>
+                    </div> 
+                  <div class="col-md-12 order-log-btns text-right">              
+                    <a href="javascript:void(0)" class="general-btn d-inline-block mb-2"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filters <i class="fa fa-filter" aria-hidden="true"></i></a>&nbsp;
                     <!-- <a href="javascript:void(0)"  data-toggle="modal" data-target="#addBooking"   class="general-btn d-inline-block">Booking <i class="fa fa-plus" aria-hidden="true"></i></a> -->
                      &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addTrain" class="general-btn d-inline-block">Train <i class="fa fa-plus" aria-hidden="true"></i></a>
                      &nbsp;<a href="javascript:void(0)"   data-toggle="modal" data-target="#addBookingToPlanner" class="general-btn d-inline-block">B To P <i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -91,8 +108,8 @@
                                                 <tr class="booking-items" v-for="(booking,index) in planner.bookings.data" :key="index">
                                                 <td :id="`booking-types-`+booking.booking_type"><input type="checkbox" class="train-select-booking"  v-model="bookingIds" @change="select" :value="booking.booking_display_id">
                                                 </td>
-                                                <td>{{booking.container_number}}  {{booking.user ? booking.user.name : 'N/A'}}<br><small>Ref</small> {{booking.reference_number}}</td>
-                                                <td>Wk {{booking.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small></td>
+                                                <td><mark :id="`booking-status-`+booking.status">{{booking.status}}</mark>&nbsp;{{booking.container_number}}  {{booking.user ? booking.user.name : 'N/A'}}<br><small>Ref</small> {{booking.reference_number}}</td>
+                                                <td>Wk {{booking.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small> <br>{{booking.terminal ? booking.terminal.name : 'N/A'}}</td>
                                                 <td>{{booking.created_at}}<br>  {{booking.goods ? booking.goods.size_type : 'N/A' }} <br><small>ID</small> {{booking.booking_display_id}}</td>
                                                 </tr>            
                                                 </table>
@@ -121,17 +138,21 @@
                             <p class="card-text heading"><strong>{{week.name}} - {{week.from_date}}</strong></p>
                             <hr/>
                                 <div class="trains" v-if="week.trains != null">
-                                  <div v-for="(train,trIndex) in week.trains" :key="trIndex" class="trains-info" :id="`train-details-`+train.id">
-                                   <a href="javascript:void(0)"><div :class="`train-meta-`+train.direction" data-toggle="collapse" :data-target="`#train-bookings-`+train.id" aria-expanded="false" :aria-controls="`train-bookings-`+train.id">
+
+                                  <div v-for="(train,trIndex) in week.trains" :key="trIndex"  class="trains-info" :id="`train-details-`+train.id">
+                                   <a href="javascript:void(0)">
+
+                                    <div :class="`train-meta-`+train.direction" data-toggle="collapse" :data-target="`#train-bookings-`+train.id" aria-expanded="false" :aria-controls="`train-bookings-`+train.id">
                                        <div :class="`train-heading-`+train.direction" @click="getTrianInfo(train.id,train.direction)">
                                           <strong><i class="fa fa-subway" aria-hidden="true"></i> &nbsp;{{train.name}}</strong>&nbsp;&nbsp;
                                           <strong>{{train.direction}}</strong>&nbsp;&nbsp;
                                           &nbsp;<span id="booking-ref"></span><span>{{train.departure_date}}</span>
                                           <br/>
                                           <span>Cap- </span> <strong>{{getTrainCapcity(wekIndex,trIndex,train.id)}} kg</strong>&nbsp;&nbsp;
-                                          <span>TUE- </span><strong>{{train.total_tue}}</strong>
+                                          <span>TEU- </span><strong>{{train.total_tue}}</strong>
                                        </div>
-                                   </div></a>
+                                   </div>
+                                   </a>
                                     <br />
                                         <div v-if="train.train_booking.length > 0" class="booking-train collapse" :id="`train-bookings-`+train.id">
                                           <span id="all-bookings"><input type="checkbox" class="train-select-booking"  v-model="trainBookingSelected[train.id]" @click="selectAllTrainBooking(wekIndex,trIndex,bokIndex,train.id)"></span>
@@ -159,8 +180,8 @@
                                                <br>
                                                <i class="fa fa-trash" id="trash-icon" aria-hidden="true"  @click="removeBooking(booking.bookings.booking_display_id,booking.is_copied,train.id)"></i>
                                               </td>
-                                              <td>{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}}<br><small>Ref</small> <span id="bok-ref">{{booking.bookings.reference_number}}</span></td>
-                                              <td>Wk {{booking.bookings.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small></td>
+                                              <td><mark :id="`booking-status-`+booking.bookings.status">{{booking.bookings.status}}</mark>&nbsp;{{booking.bookings.container_number}}  {{booking.bookings.user ? booking.bookings.user.name : 'N/A'}}<br><small>Ref</small> <span id="bok-ref">{{booking.bookings.reference_number}}</span></td>
+                                              <td>Wk {{booking.bookings.week_number}} {{booking.goods ? booking.goods.container_net : 'N/A' }}<small>kg</small><br>{{booking.bookings.terminal ? booking.bookings.terminal.name : 'N/A'}}</td>
                                               <td>{{booking.bookings.created_at}}  {{booking.goods ? booking.goods.size_type : 'N/A' }}<br><small>ID</small> {{booking.bookings.booking_display_id}}</td>
                                             </tr>
                                           </table>
@@ -169,6 +190,7 @@
                                         <p class="text-center">No Bookings available</p>  
                                         </div>                                  
                                   </div>
+
                                 </div>
                             </div>
                             </div>
@@ -295,7 +317,9 @@ export default {
         const clientsFilter  = ref([]);
         const trainsFilter   = ref([]);
         const weeksFilter    = ref([]);
-        const directionFilter    = ref([]);
+        const terminalFilter = ref([]);
+        const bookingTypeFilter = ref([]);
+        const directionFilter = ref([]);
         const filter = ref('unplanned');
         const search = ref('');
         const token  = ref();
@@ -316,6 +340,7 @@ export default {
               planner.weeks_filter= response.data.weeks_filter
               planner.trains      = response.data.trains
               planner.clients     = response.data.clients
+              planner.terminals   = response.data.terminals
             } 
             
         }catch(error){
@@ -462,10 +487,13 @@ export default {
               clients:clientsFilter.value ? clientsFilter.value : null,
               trains:trainsFilter.value ? trainsFilter.value : null,
               weeks:weeksFilter.value ? weeksFilter.value : null,
-              direction:directionFilter.value ? directionFilter.value : null
+              direction:directionFilter.value ? directionFilter.value : null,
+              booking_type:bookingTypeFilter.value ? bookingTypeFilter.value : null,
+              terminals:terminalFilter.value ? terminalFilter.value : null
             });
             if(response.data){
-                planner.weeks  = response.data
+                planner.weeks    = response.data.weeks;
+                planner.bookings = response.data.bookings ? response.data.bookings : planner.bookings;
               }  
             }catch(error){
               console.log(error)
@@ -563,6 +591,8 @@ export default {
           clientsFilter,
           trainsFilter,
           weeksFilter,
+          bookingTypeFilter,
+          terminalFilter,
           directionFilter,
           filter,
           search,

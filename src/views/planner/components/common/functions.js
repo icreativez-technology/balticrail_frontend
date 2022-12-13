@@ -36,16 +36,16 @@ export default{
           console.log(error)
       }
   },
-    async getBookingData(){
-        try{
-        let response = await axios.get("front/get_booking_data");
-        if(response){
-            return response;
-        }  
-        }catch(error){
-            console.log(error)
-        }
-    }
+    // async getBookingData(){
+    //     try{
+    //     let response = await axios.get("front/get_booking_data");
+    //     if(response){
+    //         return response;
+    //     }  
+    //     }catch(error){
+    //         console.log(error)
+    //     }
+    // }
 
     }
 }
